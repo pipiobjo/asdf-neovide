@@ -27,7 +27,6 @@ jobs:
 #        run: shfmt -ci -i 2 -d .
   plugin_test:
     strategy:
-      fail-fast: false
       matrix:
         os:
           - macos-latest
