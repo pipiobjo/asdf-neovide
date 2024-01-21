@@ -41,20 +41,19 @@ download() {
   local install_path="$3"
   local version="$4"
 
-  if [ -z "${download_path}" ];then
-    download_path=$(mktemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
-    download_path="${download_path}/neovide-${version}-${platform}.appimage"
-    ASDF_DOWNLOAD_PATH="${download_path}"
-  fi
-
   # check if download_path exists
-  if [ -d "${download_path}" ]; then
+  if [ ! -d "${download_path}" ]; then
+    mkdir -p "${download_path}"
+  else 
+    echo "download_path already exists: ${download_path} - cleaning up"
     rm -rf "${download_path}"
+    mkdir -p "${download_path}"
   fi
+  download_file_path="${download_path}/neovide"
   download_url=$(downloadURL "${install_type}" "${version}")
-  echo "==> curl -Lo $download_path -C - $download_url"
-  curl -Lo "$download_path" -C - "$download_url" || exit 1
-
+  echo "==> curl -Lo $download_file_path -C - $download_url"
+  curl -Lo "$download_file_path" -C - "$download_url" || exit 1
+  ls -la "${download_path}"
 
 
 }
