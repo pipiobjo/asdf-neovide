@@ -8,7 +8,7 @@ source "$SCRIPT_DIR/constants"
 
 
 install() {
-  if [ "$install_type" = "version" ]; then
+  if [ "$install_type" == "version" ]; then
     mv -f "$download_path"/** "$install_path"
     # Remove the download directory, just to be clean
     rm -rf "$download_path"
