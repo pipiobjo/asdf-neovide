@@ -15,9 +15,10 @@ install() {
 
 
   if [ "$install_type" == "version" ]; then
-
+    echo "install neovide to $install_path from $download_path"
     mkdir -p "$install_path"
     mv -f "$download_path" "$install_path/neovide"
+    chmod +x "$install_path/neovide"
     # Remove the download directory, just to be clean
     #rm -rf "$download_path"
   else
