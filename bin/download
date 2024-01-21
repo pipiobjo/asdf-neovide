@@ -42,7 +42,7 @@ download() {
   local install_path="$3"
   local version="$4"
 
-  if [-z "${download_path}"];then
+  if [ -z "${download_path}" ];then
     download_path=$(mtemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
     ASDF_DOWNLOAD_PATH="${download_path}"
    
