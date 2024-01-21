@@ -27,6 +27,11 @@ install() {
     mv -f "$download_path/neovide" "$install_path/"
     chmod +x "$install_path/neovide"
     ls -la "$install_path"
+    "$install_path/neovide --version"
+    echo "==> neovide installed to $install_path"
+
+    echo "calling without path"
+    neovide --version
     # Remove the download directory, just to be clean
     #rm -rf "$download_path"
   else
