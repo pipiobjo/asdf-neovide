@@ -15,9 +15,11 @@ install() {
 
 
   if [ "$install_type" == "version" ]; then
-    mv -f "$download_path" "$install_path"
+
+    mkdir -p "$install_path"
+    mv -f "$download_path" "$install_path/neovide"
     # Remove the download directory, just to be clean
-    rm -rf "$download_path"
+    #rm -rf "$download_path"
   else
     echo "unsupported install type: ${install_type}"
     exit 1
