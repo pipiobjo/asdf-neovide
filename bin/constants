@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Define global constants
+
+# Prefix used for all temporary files
+TMP_PREFIX="asdf-neovide"
+
+# GIT repository URL
+GIT_REPO_URL="https://github.com/neovide/neovide.git"
+
+# Download Version URL
+#
+DOWNLOAD_VERSION_URL="https://github.com/neovide/neovide/releases/download/%s/neovide.AppImage"

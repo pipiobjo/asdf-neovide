@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Get the directory of the script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Load constants
+source "$SCRIPT_DIR/constants"
+
+# get the platform
+# https://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
+#
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     platform=linux64;;
+    Darwin*)    platform=macos;;
+    CYGWIN*)    platform=Cygwin;;
+    MINGW*)     platform=MinGw;;
+    MSYS_NT*)   platform=Git;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo ${machine}
+
+
+
+downloadURL() {
+  local install_type="$1"
+  local version="$2"
+
+  if [ "${install_type}" == "version" ]; then
+    printf -v download_url "${DOWNLOAD_VERSION_URL}" "${version}"
+    echo  "${download_url}"
+  else
+    echo "unsupported install type: ${install_type}"
+    exit 1
+  fi
+}
+
+
+download() {
+  local install_type="$1"
+  local download_path="$2"
+  local install_path="$3"
+  local version="$4"
+
+  if [-z "${download_path}"];then
+    download_path=$(mtemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
+    ASDF_DOWNLOAD_PATH="${download_path}"
+   
+    download_url=$(downloadURL "${install_type}" "${version}"))
+
+  fi
+}
+
+download "${ASDF_INSTALL_TYPE}" "${ASDF_DOWNLOAD_PATH}" "${ASDF_INSTALL_PATH}" "${ASDF_INSTALL_VERSION}"

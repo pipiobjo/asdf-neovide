@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Get the directory of the script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Load constants
+source "$SCRIPT_DIR/constants"
+
+
+install() {
+  if [ "$install_type" = "version" ]; then
+    mv -f "$download_path"/** "$install_path"
+    # Remove the download directory, just to be clean
+    rm -rf "$download_path"
+  else
+    echo "unsupported install type: ${install_type}"
+    exit 1
+  fi  
+}
+
+install "$ASDF_INSTALL_TYPE" "$ASDF_DOWNLOAD_PATH" "$ASDF_INSTALL_PATH"
