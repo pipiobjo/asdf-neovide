@@ -39,5 +39,5 @@ jobs:
         with:
           command: neovide --version 
         env:
-          GITHUB_API_TOKEN: ${{ github.token }
+          GITHUB_API_TOKEN: ${{ github.token }}
 
