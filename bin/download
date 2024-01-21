@@ -21,7 +21,6 @@ esac
 echo ${machine}
 
 
-
 downloadURL() {
   local install_type="$1"
   local version="$2"
@@ -43,12 +42,22 @@ download() {
   local version="$4"
 
   if [ -z "${download_path}" ];then
-    download_path=$(mtemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
+    download_path=$(mktemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
+    download_path="${download_path}/neovide-${version}-${platform}.appimage"
     ASDF_DOWNLOAD_PATH="${download_path}"
-   
-    download_url=$(downloadURL "${install_type}" "${version}")
-
   fi
+
+  # check if download_path exists
+  if [ -d "${download_path}" ]; then
+    rm -rf "${download_path}"
+  fi
+  download_url=$(downloadURL "${install_type}" "${version}")
+  echo "==> curl -Lo $download_path -C - $download_url"
+  curl -Lo "$download_path" -C - "$download_url" || exit 1
+
+
+
 }
 
+parameterVerification
 download "${ASDF_INSTALL_TYPE}" "${ASDF_DOWNLOAD_PATH}" "${ASDF_INSTALL_PATH}" "${ASDF_INSTALL_VERSION}"

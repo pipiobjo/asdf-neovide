@@ -11,3 +11,26 @@ export GIT_REPO_URL="https://github.com/neovide/neovide.git"
 # Download Version URL
 #
 export DOWNLOAD_VERSION_URL="https://github.com/neovide/neovide/releases/download/%s/neovide.AppImage"
+
+
+parameterVerification(){
+    if [ -z "$ASDF_INSTALL_TYPE" ]; then
+        echo "ASDF_INSTALL_TYPE is not set"
+        exit 1
+    fi
+
+    if [ -z "$ASDF_INSTALL_VERSION" ]; then
+        echo "ASDF_INSTALL_VERSION is not set"
+        exit 1
+    fi
+
+    if [ -z "$ASDF_INSTALL_PATH" ]; then
+        echo "ASDF_INSTALL_PATH is not set"
+        exit 1
+    fi
+
+    if [ -z "$ASDF_DOWNLOAD_PATH" ]; then
+        echo "ASDF_DOWNLOAD_PATH is not set"
+        exit 1
+    fi
+}
