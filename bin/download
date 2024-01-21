@@ -46,7 +46,7 @@ download() {
     download_path=$(mtemp -d -t "${TMP_PREFIX}-${install_type}-${version}-XXXXXXXX")
     ASDF_DOWNLOAD_PATH="${download_path}"
    
-    download_url=$(downloadURL "${install_type}" "${version}"))
+    download_url=$(downloadURL "${install_type}" "${version}")
 
   fi
 }
