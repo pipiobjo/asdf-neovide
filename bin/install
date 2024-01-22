@@ -26,9 +26,8 @@ install() {
     echo "==> mv -f $download_path $install_path/neovide"
     mv -f "$download_path/neovide" "$install_path/"
     chmod +x "$install_path/neovide"
-    ls -la "$install_path"
-    "${install_path}/neovide" --version
     echo "==> neovide installed to $install_path"
+    "${install_path}/neovide" --version --appimage-extract-and-run
 
     echo "calling without path"
     neovide --version

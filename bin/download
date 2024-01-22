@@ -52,8 +52,7 @@ download() {
   download_file_path="${download_path}/neovide"
   download_url=$(downloadURL "${install_type}" "${version}")
   echo "==> curl -Lo $download_file_path -C - $download_url"
-  curl -Lo "$download_file_path" -C - "$download_url" || exit 1
-  ls -la "${download_path}"
+  curl -sLo "$download_file_path" -C - "$download_url" || exit 1
 
 
 }
